@@ -202,6 +202,7 @@ struct auscultation 	aus;
 struct pulse 			pul;
 struct cpr 				cpr;
 struct defibrillation 	def;
+struct eyes 			eyeState;
 
 void
 initializeSensorData(void )
@@ -222,7 +223,8 @@ initializeSensorData(void )
 	
 	def.last = 0;
 	def.energy = 0;
-	
+
+	eyeState.connected = 0;
 }
 char ampChar[] = "%26";
 
@@ -331,6 +333,15 @@ simMgrWrite(void )
 			do_send++;
 		}
 #endif
+		else if ( eyeState.connected != shmData->eyes.connected )
+		{
+			eyeState.connected = shmData->eyes.connected;
+			sprintf(simctlrWriteCmd, "simCurl  %s:%d/cgi-bin/simstatus.cgi?set:eyes:connected=%d",
+				shmData->simMgrIPAddr,
+				shmData->simMgrStatusPort,
+				eyeState.connected );
+			do_send++;
+		}
 		if ( do_send )
 		{
 			//log_message("", simctlrWriteCmd );

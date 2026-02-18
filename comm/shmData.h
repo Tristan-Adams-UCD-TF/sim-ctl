@@ -151,6 +151,59 @@ struct defibrillation
 	int energy;			// Energy in Joules of last shock
 };
 
+// Eye state values
+#define EYE_STATE_NORMAL    0
+#define EYE_STATE_OBTUNDED  1
+#define EYE_STATE_MIOTIC    2
+#define EYE_STATE_DILATED   3
+
+#define EYE_LID_OPEN        0
+#define EYE_LID_CLOSED      1
+#define EYE_LID_PARTIAL     2
+
+#define EYE_MOVE_NORMAL     0
+#define EYE_MOVE_INFREQ_SLOW 1
+#define EYE_MOVE_NONE       2
+
+#define EYE_POS_CENTER      0
+#define EYE_POS_RIGHT       1
+#define EYE_POS_LEFT        2
+#define EYE_POS_UP          3
+#define EYE_POS_DOWN        4
+#define EYE_POS_UP_RIGHT    5
+#define EYE_POS_UP_LEFT     6
+#define EYE_POS_DOWN_RIGHT  7
+#define EYE_POS_DOWN_LEFT   8
+
+#define EYE_BLINK_NORMAL         0
+#define EYE_BLINK_INFREQ_SLOW    1
+#define EYE_BLINK_PARTIAL_INFREQ 2
+#define EYE_BLINK_NONE           3
+
+struct eyes
+{
+	int connected;        // 1 if eyes device responds on I2C at 0x42
+
+	// Right eye state
+	int right_state;      // EYE_STATE_*
+	int right_lid;        // EYE_LID_*
+	int right_move;       // EYE_MOVE_*
+	int right_position;   // EYE_POS_*
+	int right_blink;      // EYE_BLINK_*
+	int right_pupil;      // 5-90 (percent of max size)
+
+	// Left eye state
+	int left_state;
+	int left_lid;
+	int left_move;
+	int left_position;
+	int left_blink;
+	int left_pupil;
+
+	// Command flags - set to 1 to send command, cleared after send
+	int send_command;
+};
+
 struct shmData 
 {
 	sem_t	i2c_sema;	// Mutex lock - Lock for I2C bus access
@@ -166,6 +219,7 @@ struct shmData
 	struct pulse pulse;
 	struct cpr cpr;
 	struct defibrillation defibrillation;
+	struct eyes eyes;
 	int manual_breath_ain;
 	int manual_breath_baseline;
 	int manual_breath_threashold;

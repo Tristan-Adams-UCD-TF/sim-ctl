@@ -19,6 +19,7 @@ do_status()
 	status_of_proc /usr/local/bin/soundSense soundSense
 	status_of_proc /usr/local/bin/breathSense breathSense
 	status_of_proc /usr/local/bin/cprScan cprScan
+	status_of_proc /usr/local/bin/eyesScan eyesScan
 }
 
 
@@ -31,13 +32,15 @@ do_start()
 	/usr/local/bin/soundSense
 	/usr/local/bin/breathSense
 	/usr/local/bin/cprScan
-	
+	/usr/local/bin/eyesScan
+
 }
 do_stop()
 {
 	killall soundSense
 	killall breathSense
 	killall cprScan
+	killall eyesScan
 	killall rfidScan
 	killall pulse
 	killall simController
