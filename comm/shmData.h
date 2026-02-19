@@ -229,5 +229,6 @@ struct shmData
 
 int cardiac_parse(const char *elem,  const char *value, struct cardiac *card );
 int respiration_parse(const char *elem,  const char *value, struct respiration *resp );
+int eyes_parse(const char *elem, const char *value, struct eyes *eyes);
 
 #endif /* SIMDATA_H_ */

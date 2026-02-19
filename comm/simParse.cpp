@@ -504,3 +504,68 @@ respiration_parse(const char *elem,  const char *value, struct respiration *resp
 	}
 	return ( sts );
 }
+
+int
+eyes_parse(const char *elem, const char *value, struct eyes *eyes)
+{
+	int sts = 0;
+	int int_val = atoi(value);
+
+	if ((!elem) || (!value) || (!eyes))
+	{
+		return (-13);
+	}
+	if (strcmp(elem, "right_state") == 0)
+	{
+		eyes->right_state = int_val;
+	}
+	else if (strcmp(elem, "right_lid") == 0)
+	{
+		eyes->right_lid = int_val;
+	}
+	else if (strcmp(elem, "right_move") == 0)
+	{
+		eyes->right_move = int_val;
+	}
+	else if (strcmp(elem, "right_position") == 0)
+	{
+		eyes->right_position = int_val;
+	}
+	else if (strcmp(elem, "right_blink") == 0)
+	{
+		eyes->right_blink = int_val;
+	}
+	else if (strcmp(elem, "right_pupil") == 0)
+	{
+		eyes->right_pupil = int_val;
+	}
+	else if (strcmp(elem, "left_state") == 0)
+	{
+		eyes->left_state = int_val;
+	}
+	else if (strcmp(elem, "left_lid") == 0)
+	{
+		eyes->left_lid = int_val;
+	}
+	else if (strcmp(elem, "left_move") == 0)
+	{
+		eyes->left_move = int_val;
+	}
+	else if (strcmp(elem, "left_position") == 0)
+	{
+		eyes->left_position = int_val;
+	}
+	else if (strcmp(elem, "left_blink") == 0)
+	{
+		eyes->left_blink = int_val;
+	}
+	else if (strcmp(elem, "left_pupil") == 0)
+	{
+		eyes->left_pupil = int_val;
+	}
+	else
+	{
+		sts = 1;
+	}
+	return (sts);
+}

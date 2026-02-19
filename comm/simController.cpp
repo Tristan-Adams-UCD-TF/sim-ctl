@@ -58,6 +58,7 @@ using namespace std;
 #define SEC_CARDIAC		1
 #define SEC_RESPIRATION	2
 #define SEC_GENERAL		3
+#define SEC_EYES		4
 
 struct shmData *shmData;
 #define BUF_LEN_MAX	4096
@@ -559,6 +560,10 @@ simMgrRead(void )
 				{
 					section = SEC_RESPIRATION;
 				}
+				else if ( strcmp(name, "eyes" ) == 0 )
+				{
+					section = SEC_EYES;
+				}
 				else
 				{
 					section = SEC_NONE;
@@ -588,6 +593,13 @@ simMgrRead(void )
 							printf("respiration: '%s', Value '%s'\n", name, value );
 						}
 						respiration_parse(name,  value, &shmData->respiration );
+						break;
+					case SEC_EYES:
+						if ( debug > 1 )
+						{
+							printf("eyes: '%s', Value '%s'\n", name, value );
+						}
+						eyes_parse(name, value, &shmData->eyes );
 						break;
 				}
 			}
