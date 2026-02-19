@@ -8,5 +8,5 @@
 # Port only
 #               :50200
 #               :40844
-# Temporary direct ethernet connection for OVS eyes development
+# Direct ethernet connection to WinVetSim for OVS eyes development
         192.168.1.100:40844

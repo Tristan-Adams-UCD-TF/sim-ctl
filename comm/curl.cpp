@@ -97,7 +97,10 @@ int curl(char *url )
 		/* specify target URL, and note that this URL should also include a file
 		   name, not only a directory (as you can do with GTP uploads) */
 		curl_easy_setopt(curl, CURLOPT_URL, url);
-	
+
+		// OVS eyes added curl timeout for development. TODO probably remove
+		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
+
 		/* Now run off and do what you've been told! */
 		res = curl_easy_perform(curl);
 		/* Check for errors */

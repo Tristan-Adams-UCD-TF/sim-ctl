@@ -344,7 +344,7 @@ simMgrWrite(void )
 		}
 		if ( do_send )
 		{
-			//log_message("", simctlrWriteCmd );
+			log_message("", simctlrWriteCmd );
 			pipe = popen(simctlrWriteCmd, "r" );
 			if ( !pipe )
 			{
