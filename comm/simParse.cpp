@@ -595,6 +595,10 @@ eyes_parse(const char *elem, const char *value, struct eyes *eyes)
 	{
 		eyes->left_nystagmus = int_val;
 	}
+	else if (strcmp(elem, "send_command") == 0)
+	{
+		eyes->send_command = int_val;
+	}
 	else if (strcmp(elem, "send_input_response") == 0)
 	{
 		eyes->send_input_response = int_val;
