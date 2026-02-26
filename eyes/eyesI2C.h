@@ -21,8 +21,9 @@
 #define EYES_I2C_ADDR  0x42
 
 // Command packet structure (matches RP2040 protocol)
-#define EYES_PACKET_SIZE    12
-#define EYES_CMD_HEADER     0xBB
+#define EYES_PACKET_SIZE       12
+#define EYES_CMD_HEADER        0xBB
+#define EYES_INPUT_RESP_HEADER 0xCC
 
 // Packet byte indices
 #define PKT_HEADER      0
@@ -81,6 +82,10 @@ public:
                         int rPos, int lPos,
                         int rBlink, int lBlink,
                         int rPupil, int lPupil);
+    int sendInputResponseCommand(int rPlr, int lPlr,
+                                 int rMenace, int lMenace,
+                                 int rPalpebral, int lPalpebral,
+                                 int rNystagmus, int lNystagmus);
     int present;
 
     virtual ~eyesI2C();

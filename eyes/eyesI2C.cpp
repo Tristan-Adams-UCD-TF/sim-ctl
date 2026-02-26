@@ -208,6 +208,24 @@ int eyesI2C::sendFullCommand(int rState, int lState,
     return sendCommand(packet);
 }
 
+int eyesI2C::sendInputResponseCommand(int rPlr, int lPlr,
+                                       int rMenace, int lMenace,
+                                       int rPalpebral, int lPalpebral,
+                                       int rNystagmus, int lNystagmus)
+{
+    unsigned char packet[EYES_PACKET_SIZE];
+
+    memset(packet, 0, EYES_PACKET_SIZE);
+    packet[PKT_HEADER]  = EYES_INPUT_RESP_HEADER;
+    packet[1]           = encodeStandard(1, rPlr,       1, lPlr);
+    packet[2]           = encodeStandard(1, rMenace,    1, lMenace);
+    packet[3]           = encodeStandard(1, rPalpebral, 1, lPalpebral);
+    packet[4]           = encodeStandard(1, rNystagmus, 1, lNystagmus);
+    // Bytes 5-10 remain 0 (reserved)
+
+    return sendCommand(packet);
+}
+
 eyesI2C::~eyesI2C()
 {
     if (I2Cfile >= 0)

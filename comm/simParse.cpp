@@ -563,6 +563,42 @@ eyes_parse(const char *elem, const char *value, struct eyes *eyes)
 	{
 		eyes->left_pupil = int_val;
 	}
+	else if (strcmp(elem, "right_plr") == 0)
+	{
+		eyes->right_plr = int_val;
+	}
+	else if (strcmp(elem, "right_menace") == 0)
+	{
+		eyes->right_menace = int_val;
+	}
+	else if (strcmp(elem, "right_palpebral") == 0)
+	{
+		eyes->right_palpebral = int_val;
+	}
+	else if (strcmp(elem, "right_nystagmus") == 0)
+	{
+		eyes->right_nystagmus = int_val;
+	}
+	else if (strcmp(elem, "left_plr") == 0)
+	{
+		eyes->left_plr = int_val;
+	}
+	else if (strcmp(elem, "left_menace") == 0)
+	{
+		eyes->left_menace = int_val;
+	}
+	else if (strcmp(elem, "left_palpebral") == 0)
+	{
+		eyes->left_palpebral = int_val;
+	}
+	else if (strcmp(elem, "left_nystagmus") == 0)
+	{
+		eyes->left_nystagmus = int_val;
+	}
+	else if (strcmp(elem, "send_input_response") == 0)
+	{
+		eyes->send_input_response = int_val;
+	}
 	else
 	{
 		sts = 1;

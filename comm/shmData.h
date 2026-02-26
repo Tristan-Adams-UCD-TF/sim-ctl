@@ -180,6 +180,19 @@ struct defibrillation
 #define EYE_BLINK_PARTIAL_INFREQ 2
 #define EYE_BLINK_NONE           3
 
+// Input response override values (matching M4SK enums)
+#define EYE_PLR_NORMAL           0
+#define EYE_PLR_PARTIAL          1
+#define EYE_PLR_NONE             2
+
+#define EYE_BLINK_RESP_NONE          0
+#define EYE_BLINK_RESP_NORMAL        1
+#define EYE_BLINK_RESP_SLOW_PARTIAL  2
+
+#define EYE_NYST_NORMAL          0
+#define EYE_NYST_SLOW            1
+#define EYE_NYST_NONE            2
+
 struct eyes
 {
 	int connected;        // 1 if eyes device responds on I2C at 0x42
@@ -200,8 +213,19 @@ struct eyes
 	int left_blink;
 	int left_pupil;
 
+	// Input response overrides (per eye) — 0=None/Normal/Normal, match M4SK enums
+	int right_plr;          // EYE_PLR_*
+	int right_menace;       // EYE_BLINK_RESP_*
+	int right_palpebral;    // EYE_BLINK_RESP_*
+	int right_nystagmus;    // EYE_NYST_*
+	int left_plr;
+	int left_menace;
+	int left_palpebral;
+	int left_nystagmus;
+
 	// Command flags - set to 1 to send command, cleared after send
 	int send_command;
+	int send_input_response; // Set to 1 to send input response packet
 };
 
 struct shmData 
