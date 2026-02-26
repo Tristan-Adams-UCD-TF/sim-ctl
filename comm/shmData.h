@@ -191,7 +191,8 @@ struct defibrillation
 
 #define EYE_NYST_NORMAL          0
 #define EYE_NYST_SLOW            1
-#define EYE_NYST_NONE            2
+#define EYE_NYST_VERY_SLOW       2
+#define EYE_NYST_NONE            3
 
 struct eyes
 {
