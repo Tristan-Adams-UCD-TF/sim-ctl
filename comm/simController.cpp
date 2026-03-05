@@ -204,6 +204,7 @@ struct pulse 			pul;
 struct cpr 				cpr;
 struct defibrillation 	def;
 struct eyes 			eyeState;
+static int simMgrWasAvailable = 0;
 
 void
 initializeSensorData(void )
@@ -531,9 +532,11 @@ simMgrRead(void )
 	else
 	{
 		// Super-simple parse routine
+		int simMgrGotData = 0;
 		section = SEC_NONE;
 		while (fgets(msgbuf, BUF_LEN_MAX, pipe) != NULL)
 		{
+			simMgrGotData = 1;
 			for ( i = 0 ; msgbuf[i] != 0 ; i++ )
 			{
 				switch ( msgbuf[i] )
@@ -606,7 +609,13 @@ simMgrRead(void )
 
 		}
 		pclose(pipe );
+
+		// Detect WinVetSim coming online: force resend of eyes.connected
+		if (simMgrGotData && !simMgrWasAvailable)
+		{
+			eyeState.connected = 0;
+		}
+		simMgrWasAvailable = simMgrGotData;
 	}
 }
 
-	
