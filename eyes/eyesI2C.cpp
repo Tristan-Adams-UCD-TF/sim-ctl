@@ -208,7 +208,8 @@ int eyesI2C::sendFullCommand(int rState, int lState,
     return sendCommand(packet);
 }
 
-int eyesI2C::sendInputResponseCommand(int rPlr, int lPlr,
+int eyesI2C::sendInputResponseCommand(int rPlrExposed, int rPlrConsensual,
+                                       int lPlrExposed, int lPlrConsensual,
                                        int rMenace, int lMenace,
                                        int rPalpebral, int lPalpebral,
                                        int rNystagmus, int lNystagmus)
@@ -217,11 +218,12 @@ int eyesI2C::sendInputResponseCommand(int rPlr, int lPlr,
 
     memset(packet, 0, EYES_PACKET_SIZE);
     packet[PKT_HEADER]  = EYES_INPUT_RESP_HEADER;
-    packet[1]           = encodeStandard(1, rPlr,       1, lPlr);
-    packet[2]           = encodeStandard(1, rMenace,    1, lMenace);
-    packet[3]           = encodeStandard(1, rPalpebral, 1, lPalpebral);
-    packet[4]           = encodeStandard(1, rNystagmus, 1, lNystagmus);
-    // Bytes 5-10 remain 0 (reserved)
+    packet[1]           = encodeStandard(1, rPlrExposed,    1, lPlrExposed);
+    packet[2]           = encodeStandard(1, rMenace,        1, lMenace);
+    packet[3]           = encodeStandard(1, rPalpebral,     1, lPalpebral);
+    packet[4]           = encodeStandard(1, rNystagmus,     1, lNystagmus);
+    packet[5]           = encodeStandard(1, rPlrConsensual, 1, lPlrConsensual);
+    // Bytes 6-10 remain 0 (reserved)
 
     return sendCommand(packet);
 }

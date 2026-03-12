@@ -82,7 +82,8 @@ public:
                         int rPos, int lPos,
                         int rBlink, int lBlink,
                         int rPupil, int lPupil);
-    int sendInputResponseCommand(int rPlr, int lPlr,
+    int sendInputResponseCommand(int rPlrExposed, int rPlrConsensual,
+                                 int lPlrExposed, int lPlrConsensual,
                                  int rMenace, int lMenace,
                                  int rPalpebral, int lPalpebral,
                                  int rNystagmus, int lNystagmus);

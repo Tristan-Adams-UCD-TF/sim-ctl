@@ -563,9 +563,13 @@ eyes_parse(const char *elem, const char *value, struct eyes *eyes)
 	{
 		eyes->left_pupil = int_val;
 	}
-	else if (strcmp(elem, "right_plr") == 0)
+	else if (strcmp(elem, "right_plr_exposed") == 0)
 	{
-		eyes->right_plr = int_val;
+		eyes->right_plr_exposed = int_val;
+	}
+	else if (strcmp(elem, "right_plr_consensual") == 0)
+	{
+		eyes->right_plr_consensual = int_val;
 	}
 	else if (strcmp(elem, "right_menace") == 0)
 	{
@@ -579,9 +583,13 @@ eyes_parse(const char *elem, const char *value, struct eyes *eyes)
 	{
 		eyes->right_nystagmus = int_val;
 	}
-	else if (strcmp(elem, "left_plr") == 0)
+	else if (strcmp(elem, "left_plr_exposed") == 0)
 	{
-		eyes->left_plr = int_val;
+		eyes->left_plr_exposed = int_val;
+	}
+	else if (strcmp(elem, "left_plr_consensual") == 0)
+	{
+		eyes->left_plr_consensual = int_val;
 	}
 	else if (strcmp(elem, "left_menace") == 0)
 	{

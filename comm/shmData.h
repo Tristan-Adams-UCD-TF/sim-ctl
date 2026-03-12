@@ -215,11 +215,13 @@ struct eyes
 	int left_pupil;
 
 	// Input response overrides (per eye) — 0=None/Normal/Normal, match M4SK enums
-	int right_plr;          // EYE_PLR_*
-	int right_menace;       // EYE_BLINK_RESP_*
-	int right_palpebral;    // EYE_BLINK_RESP_*
-	int right_nystagmus;    // EYE_NYST_*
-	int left_plr;
+	int right_plr_exposed;      // EYE_PLR_* — response of right eye when light shone in right eye
+	int right_plr_consensual;   // EYE_PLR_* — response of left eye when light shone in right eye
+	int right_menace;           // EYE_BLINK_RESP_*
+	int right_palpebral;        // EYE_BLINK_RESP_*
+	int right_nystagmus;        // EYE_NYST_*
+	int left_plr_exposed;       // EYE_PLR_* — response of left eye when light shone in left eye
+	int left_plr_consensual;    // EYE_PLR_* — response of right eye when light shone in left eye
 	int left_menace;
 	int left_palpebral;
 	int left_nystagmus;

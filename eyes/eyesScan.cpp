@@ -59,11 +59,13 @@ struct {
 
 // Track previous input response values to detect changes
 struct {
-    int right_plr;
+    int right_plr_exposed;
+    int right_plr_consensual;
     int right_menace;
     int right_palpebral;
     int right_nystagmus;
-    int left_plr;
+    int left_plr_exposed;
+    int left_plr_consensual;
     int left_menace;
     int left_palpebral;
     int left_nystagmus;
@@ -140,15 +142,17 @@ void updatePrevEyes(void)
 // Initialize input response previous values from shared memory
 void initPrevInputResponse(void)
 {
-    prevInputResponse.right_plr       = shmData->eyes.right_plr;
-    prevInputResponse.right_menace    = shmData->eyes.right_menace;
-    prevInputResponse.right_palpebral = shmData->eyes.right_palpebral;
-    prevInputResponse.right_nystagmus = shmData->eyes.right_nystagmus;
-    prevInputResponse.left_plr        = shmData->eyes.left_plr;
-    prevInputResponse.left_menace     = shmData->eyes.left_menace;
-    prevInputResponse.left_palpebral  = shmData->eyes.left_palpebral;
-    prevInputResponse.left_nystagmus  = shmData->eyes.left_nystagmus;
-    prevInputResponse.send_input_response = 0;
+    prevInputResponse.right_plr_exposed    = shmData->eyes.right_plr_exposed;
+    prevInputResponse.right_plr_consensual = shmData->eyes.right_plr_consensual;
+    prevInputResponse.right_menace         = shmData->eyes.right_menace;
+    prevInputResponse.right_palpebral      = shmData->eyes.right_palpebral;
+    prevInputResponse.right_nystagmus      = shmData->eyes.right_nystagmus;
+    prevInputResponse.left_plr_exposed     = shmData->eyes.left_plr_exposed;
+    prevInputResponse.left_plr_consensual  = shmData->eyes.left_plr_consensual;
+    prevInputResponse.left_menace          = shmData->eyes.left_menace;
+    prevInputResponse.left_palpebral       = shmData->eyes.left_palpebral;
+    prevInputResponse.left_nystagmus       = shmData->eyes.left_nystagmus;
+    prevInputResponse.send_input_response  = 0;
 }
 
 // Check if any input response values have changed
@@ -156,28 +160,32 @@ int inputResponseChanged(void)
 {
     if (shmData->eyes.send_input_response)
         return 1;
-    if (prevInputResponse.right_plr       != shmData->eyes.right_plr)       return 1;
-    if (prevInputResponse.right_menace    != shmData->eyes.right_menace)     return 1;
-    if (prevInputResponse.right_palpebral != shmData->eyes.right_palpebral)  return 1;
-    if (prevInputResponse.right_nystagmus != shmData->eyes.right_nystagmus)  return 1;
-    if (prevInputResponse.left_plr        != shmData->eyes.left_plr)         return 1;
-    if (prevInputResponse.left_menace     != shmData->eyes.left_menace)      return 1;
-    if (prevInputResponse.left_palpebral  != shmData->eyes.left_palpebral)   return 1;
-    if (prevInputResponse.left_nystagmus  != shmData->eyes.left_nystagmus)   return 1;
+    if (prevInputResponse.right_plr_exposed    != shmData->eyes.right_plr_exposed)    return 1;
+    if (prevInputResponse.right_plr_consensual != shmData->eyes.right_plr_consensual) return 1;
+    if (prevInputResponse.right_menace         != shmData->eyes.right_menace)         return 1;
+    if (prevInputResponse.right_palpebral      != shmData->eyes.right_palpebral)      return 1;
+    if (prevInputResponse.right_nystagmus      != shmData->eyes.right_nystagmus)      return 1;
+    if (prevInputResponse.left_plr_exposed     != shmData->eyes.left_plr_exposed)     return 1;
+    if (prevInputResponse.left_plr_consensual  != shmData->eyes.left_plr_consensual)  return 1;
+    if (prevInputResponse.left_menace          != shmData->eyes.left_menace)          return 1;
+    if (prevInputResponse.left_palpebral       != shmData->eyes.left_palpebral)       return 1;
+    if (prevInputResponse.left_nystagmus       != shmData->eyes.left_nystagmus)       return 1;
     return 0;
 }
 
 // Update input response previous values after sending command
 void updatePrevInputResponse(void)
 {
-    prevInputResponse.right_plr       = shmData->eyes.right_plr;
-    prevInputResponse.right_menace    = shmData->eyes.right_menace;
-    prevInputResponse.right_palpebral = shmData->eyes.right_palpebral;
-    prevInputResponse.right_nystagmus = shmData->eyes.right_nystagmus;
-    prevInputResponse.left_plr        = shmData->eyes.left_plr;
-    prevInputResponse.left_menace     = shmData->eyes.left_menace;
-    prevInputResponse.left_palpebral  = shmData->eyes.left_palpebral;
-    prevInputResponse.left_nystagmus  = shmData->eyes.left_nystagmus;
+    prevInputResponse.right_plr_exposed    = shmData->eyes.right_plr_exposed;
+    prevInputResponse.right_plr_consensual = shmData->eyes.right_plr_consensual;
+    prevInputResponse.right_menace         = shmData->eyes.right_menace;
+    prevInputResponse.right_palpebral      = shmData->eyes.right_palpebral;
+    prevInputResponse.right_nystagmus      = shmData->eyes.right_nystagmus;
+    prevInputResponse.left_plr_exposed     = shmData->eyes.left_plr_exposed;
+    prevInputResponse.left_plr_consensual  = shmData->eyes.left_plr_consensual;
+    prevInputResponse.left_menace          = shmData->eyes.left_menace;
+    prevInputResponse.left_palpebral       = shmData->eyes.left_palpebral;
+    prevInputResponse.left_nystagmus       = shmData->eyes.left_nystagmus;
     shmData->eyes.send_input_response = 0;
 }
 
@@ -226,15 +234,17 @@ int main(int argc, char *argv[])
     shmData->eyes.send_command = 0;
 
     // Initialize input response state in shared memory (Normal state defaults)
-    shmData->eyes.right_plr        = EYE_PLR_NORMAL;
-    shmData->eyes.right_menace     = EYE_BLINK_RESP_NORMAL;
-    shmData->eyes.right_palpebral  = EYE_BLINK_RESP_NORMAL;
-    shmData->eyes.right_nystagmus  = EYE_NYST_NORMAL;
-    shmData->eyes.left_plr         = EYE_PLR_NORMAL;
-    shmData->eyes.left_menace      = EYE_BLINK_RESP_NORMAL;
-    shmData->eyes.left_palpebral   = EYE_BLINK_RESP_NORMAL;
-    shmData->eyes.left_nystagmus   = EYE_NYST_NORMAL;
-    shmData->eyes.send_input_response = 0;
+    shmData->eyes.right_plr_exposed    = EYE_PLR_NORMAL;
+    shmData->eyes.right_plr_consensual = EYE_PLR_NORMAL;
+    shmData->eyes.right_menace         = EYE_BLINK_RESP_NORMAL;
+    shmData->eyes.right_palpebral      = EYE_BLINK_RESP_NORMAL;
+    shmData->eyes.right_nystagmus      = EYE_NYST_NORMAL;
+    shmData->eyes.left_plr_exposed     = EYE_PLR_NORMAL;
+    shmData->eyes.left_plr_consensual  = EYE_PLR_NORMAL;
+    shmData->eyes.left_menace          = EYE_BLINK_RESP_NORMAL;
+    shmData->eyes.left_palpebral       = EYE_BLINK_RESP_NORMAL;
+    shmData->eyes.left_nystagmus       = EYE_NYST_NORMAL;
+    shmData->eyes.send_input_response  = 0;
 
     // Scan for eyes controller
     eyesI2C eyesCtl;
@@ -260,7 +270,8 @@ int main(int argc, char *argv[])
 
         // Send initial input response state
         eyesCtl.sendInputResponseCommand(
-            shmData->eyes.right_plr, shmData->eyes.left_plr,
+            shmData->eyes.right_plr_exposed, shmData->eyes.right_plr_consensual,
+            shmData->eyes.left_plr_exposed, shmData->eyes.left_plr_consensual,
             shmData->eyes.right_menace, shmData->eyes.left_menace,
             shmData->eyes.right_palpebral, shmData->eyes.left_palpebral,
             shmData->eyes.right_nystagmus, shmData->eyes.left_nystagmus
@@ -330,7 +341,8 @@ int main(int argc, char *argv[])
                 }
 
                 sts = eyesCtl.sendInputResponseCommand(
-                    shmData->eyes.right_plr, shmData->eyes.left_plr,
+                    shmData->eyes.right_plr_exposed, shmData->eyes.right_plr_consensual,
+                    shmData->eyes.left_plr_exposed, shmData->eyes.left_plr_consensual,
                     shmData->eyes.right_menace, shmData->eyes.left_menace,
                     shmData->eyes.right_palpebral, shmData->eyes.left_palpebral,
                     shmData->eyes.right_nystagmus, shmData->eyes.left_nystagmus
