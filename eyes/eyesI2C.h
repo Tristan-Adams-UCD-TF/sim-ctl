@@ -30,13 +30,13 @@
 #define PKT_EYESTATE    1
 #define PKT_RESET       2
 #define PKT_LID         3
-#define PKT_MOVE        4
+#define PKT_MOVE_R      4
 #define PKT_POS_R       5
 #define PKT_POS_L       6
 #define PKT_BLINK       7
 #define PKT_PUPIL_R     8
 #define PKT_PUPIL_L     9
-#define PKT_RESERVED    10
+#define PKT_MOVE_L      10
 #define PKT_CHECKSUM    11
 
 // Bit positions for standard command bytes

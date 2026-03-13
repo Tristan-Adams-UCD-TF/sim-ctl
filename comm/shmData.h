@@ -161,9 +161,13 @@ struct defibrillation
 #define EYE_LID_CLOSED      1
 #define EYE_LID_PARTIAL     2
 
-#define EYE_MOVE_NORMAL     0
+#define EYE_MOVE_NORMAL      0
 #define EYE_MOVE_INFREQ_SLOW 1
-#define EYE_MOVE_NONE       2
+#define EYE_MOVE_NONE        2
+#define EYE_MOVE_DRIFT_R     3
+#define EYE_MOVE_DRIFT_L     4
+#define EYE_MOVE_DRIFT_U     5
+#define EYE_MOVE_DRIFT_D     6
 
 #define EYE_POS_CENTER      0
 #define EYE_POS_RIGHT       1

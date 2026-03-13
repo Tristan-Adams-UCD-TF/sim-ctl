@@ -198,7 +198,8 @@ int eyesI2C::sendFullCommand(int rState, int lState,
     packet[PKT_HEADER] = EYES_CMD_HEADER;
     packet[PKT_EYESTATE] = encodeStandard(1, rState, 1, lState);
     packet[PKT_LID] = encodeStandard(1, rLid, 1, lLid);
-    packet[PKT_MOVE] = encodeStandard(1, rMove, 1, lMove);
+    packet[PKT_MOVE_R] = encodePosition(1, rMove);
+    packet[PKT_MOVE_L] = encodePosition(1, lMove);
     packet[PKT_POS_R] = encodePosition(1, rPos);
     packet[PKT_POS_L] = encodePosition(1, lPos);
     packet[PKT_BLINK] = encodeStandard(1, rBlink, 1, lBlink);
