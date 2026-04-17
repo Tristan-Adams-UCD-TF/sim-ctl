@@ -7,6 +7,4 @@
 #       winvetsim:40844
 # Port only
 #               :50200
-#               :40844
-# Direct ethernet connection to WinVetSim for OVS eyes development
-        192.168.1.100:40844
+               :40844
