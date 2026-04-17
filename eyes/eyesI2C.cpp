@@ -32,6 +32,7 @@ eyesI2C::eyesI2C()
     present = 0;
     I2CAddr = EYES_I2C_ADDR;
     I2Cfile = -1;
+    consecutiveFailures = 0;
 
     (void)scanForDevice();
 }
@@ -79,6 +80,7 @@ int eyesI2C::scanForDevice(void)
                 if (readBuf[0] == 0x01)
                 {
                     present = 1;
+                    consecutiveFailures = 0;
                     if (debug)
                     {
                         printf("Eyes controller found on I2C bus %d at address 0x%02X\n",
@@ -136,11 +138,16 @@ int eyesI2C::sendCommand(unsigned char* packet)
     {
         if (errno == 121)
         {
-            present = 0;
+            consecutiveFailures++;
+            if (consecutiveFailures >= EYES_MAX_CONSECUTIVE_FAILURES)
+            {
+                present = 0;
+            }
         }
         return -2;
     }
 
+    consecutiveFailures = 0;
     return 0;
 }
 

@@ -19,6 +19,7 @@
 
 // RP2040 eyes controller I2C address
 #define EYES_I2C_ADDR  0x42
+#define EYES_MAX_CONSECUTIVE_FAILURES 5
 
 // Command packet structure (matches RP2040 protocol)
 #define EYES_PACKET_SIZE       12
@@ -88,6 +89,7 @@ public:
                                  int rPalpebral, int lPalpebral,
                                  int rNystagmus, int lNystagmus);
     int present;
+    int consecutiveFailures;
 
     virtual ~eyesI2C();
 };
