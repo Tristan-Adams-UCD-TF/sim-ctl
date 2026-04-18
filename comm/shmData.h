@@ -203,7 +203,7 @@ struct eyes
 	int connected;        // 1 if eyes device responds on I2C at 0x42
 
 	// Right eye state
-	int right_state;      // EYE_STATE_*
+	int right_state;      // EYE_STATE_* - eye neuro state
 	int right_lid;        // EYE_LID_*
 	int right_move;       // EYE_MOVE_*
 	int right_position;   // EYE_POS_*
@@ -218,7 +218,9 @@ struct eyes
 	int left_blink;
 	int left_pupil;
 
-	// Input response overrides (per eye) — 0=None/Normal/Normal, match M4SK enums
+	// Input response overrides per eye
+	// These can be set by user in ii to override default input responses
+	// that are associated with the current eye neuro state 
 	int right_plr_exposed;      // EYE_PLR_* — response of right eye when light shone in right eye
 	int right_plr_consensual;   // EYE_PLR_* — response of left eye when light shone in right eye
 	int right_menace;           // EYE_BLINK_RESP_*
@@ -231,8 +233,8 @@ struct eyes
 	int left_nystagmus;
 
 	// Command flags - set to 1 to send command, cleared after send
-	int send_command;
-	int send_input_response; // Set to 1 to send input response packet
+	int send_command;	// eye state fields
+	int send_input_response;	// input response overrides
 };
 
 struct shmData 

@@ -98,7 +98,8 @@ int curl(char *url )
 		   name, not only a directory (as you can do with GTP uploads) */
 		curl_easy_setopt(curl, CURLOPT_URL, url);
 
-		// OVS eyes added curl timeout for development. TODO probably remove
+		// Curl timeout prevents need to manually restart simController daemon
+		// after lost connection with sim manager
 		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
 
 		/* Now run off and do what you've been told! */
