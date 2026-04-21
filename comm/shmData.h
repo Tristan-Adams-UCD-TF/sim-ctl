@@ -184,7 +184,7 @@ struct defibrillation
 #define EYE_BLINK_PARTIAL_INFREQ 2
 #define EYE_BLINK_NONE           3
 
-// Input response override values (matching M4SK enums)
+// Eye input response values (match M4SK enums)
 #define EYE_PLR_NORMAL           0
 #define EYE_PLR_PARTIAL          1
 #define EYE_PLR_NONE             2
@@ -200,7 +200,7 @@ struct defibrillation
 
 struct eyes
 {
-	int connected;        // 1 if eyes device responds on I2C at 0x42
+	int connected;        // 1 if eyes device responds on I2C
 
 	// Right eye state
 	int right_state;      // EYE_STATE_* - eye neuro state
@@ -208,7 +208,7 @@ struct eyes
 	int right_move;       // EYE_MOVE_*
 	int right_position;   // EYE_POS_*
 	int right_blink;      // EYE_BLINK_*
-	int right_pupil;      // 5-90 (percent of max size)
+	int right_pupil;      // 5-90 percent of whole iris
 
 	// Left eye state
 	int left_state;
@@ -218,7 +218,7 @@ struct eyes
 	int left_blink;
 	int left_pupil;
 
-	// Input response overrides per eye
+	// Eye input response overrides per eye
 	// These can be set by user in ii to override default input responses
 	// that are associated with the current eye neuro state 
 	int right_plr_exposed;      // EYE_PLR_* — response of right eye when light shone in right eye

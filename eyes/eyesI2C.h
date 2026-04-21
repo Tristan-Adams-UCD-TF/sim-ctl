@@ -2,9 +2,7 @@
  * eyesI2C.h
  * Definition of a class to interface with the OVS Eyes RP2040 controller
  *
- * This file is part of the sim-ctl distribution (https://github.com/OpenVetSimDevelopers/sim-ctl).
- *
- * Copyright (c) 2026 VetSim, Cornell University College of Veterinary Medicine Ithaca, NY
+ * This file is part of the sim-ctl distribution (https://github.com/openvetsim/sim-ctl).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
