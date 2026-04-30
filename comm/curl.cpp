@@ -99,9 +99,9 @@ int curl(char *url )
 		curl_easy_setopt(curl, CURLOPT_URL, url);
 
 		// Curl timeout prevents need to manually restart simController daemon
-		// after losing connection with sim manager
-		// Currently implemented only for development
-		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
+		// after losing connection with sim manager (?)
+		// Currently not needed
+		// curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
 
 		/* Now run off and do what you've been told! */
 		res = curl_easy_perform(curl);
