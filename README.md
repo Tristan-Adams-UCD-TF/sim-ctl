@@ -12,6 +12,7 @@ All projects within the archive are licensed under GLP v3.0. See LICENSE.
 | cardiac | Manage the parameters for the Cardiac support and actions taken on Pulse Syncs. |
 | comm    | Common files including communications with the Sim Manager. |
 | cpr     | Chest compression sensor support including both Accelerometer and Time-of-Flight. |
+| eyes    | OVS Eyes RP2040 controller integration. I2C daemon and shared memory support for eye control. |
 | initialization | Default configuration files and service files. |
 | pulse   | Support for touch sensors on Pulse units. |
 | respiration | Support for manual breath sensor. |
